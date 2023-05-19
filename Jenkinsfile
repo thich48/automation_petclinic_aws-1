@@ -91,7 +91,7 @@ cat $KUBECONFIG > ~/.kube/config
         KUBECONFIG = credentials('config')
       }
       steps {
-        timeout(time: 15, unit: 'MINUTES ') {
+        timeout(time: 15, unit: 'MINUTES') {
           input(message: 'Do you want to deploy in production ?', ok: 'Yes')
         }
 
