@@ -4,7 +4,8 @@ pipeline {
     stage('verify supported software') {
       steps {
         sh '''
-         ls
+         mvn version
+         docker compose version
         '''
       }
     }
