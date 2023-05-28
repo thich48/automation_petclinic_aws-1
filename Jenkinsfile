@@ -15,13 +15,17 @@ pipeline {
         echo 'Build docker : using docker compose multiple microservices'
         sh 'docker system prune -a --volumes -f'
         sh './scripts/run_all.sh'
+        sh 'docker-compose up'
+        
       }
     }
 
  
     stage('Run tests against the container') {
       steps {
+        
         echo 'Test should be applied after the deployment on the different servers'
+        sh 'docker-compose logs'
         
         echo 'Discovery Server - http://localhost:8761'
         sh 'curl -Is http://localhost:8761 | head -n 1'
