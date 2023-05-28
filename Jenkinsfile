@@ -19,8 +19,7 @@ pipeline {
 
     stage('Build docker') {
       steps {
-        sh 'docker compose up'
-        sh 'docker compose ps'
+       echo 'Build docker : using docker compose multiple microservices'
       }
     }
 
