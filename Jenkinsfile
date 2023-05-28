@@ -10,30 +10,15 @@ pipeline {
       }
     }
 
-    stage('Maven build') {
+    stage('Maven build + Build docker compose build') {
       steps {
+        echo 'Build docker : using docker compose multiple microservices'
         sh 'docker system prune -a --volumes -f'
         sh './scripts/run_all.sh'
       }
     }
 
-    stage('Build docker') {
-      steps {
-       echo 'Build docker : using docker compose multiple microservices'
-        sh 'docker compose up'
-      }
-    }
-
-    stage('Push docker images to DockerHub') {
-      environment {
-        DOCKER_PASS = credentials('DOCKER_HUB_PASS')
-      }
-      steps {
-        sh 'docker login -u $DOCKER_ID -p $DOCKER_PASS'
-        echo 'Push docker images to DockerHub : using docker compose multiple microservices'
-      }
-    }
-
+ 
     stage('Run tests against the container') {
       steps {
         echo 'Test should be applied after the deployment on the different servers'
@@ -67,6 +52,7 @@ pipeline {
       }
       steps {
         script {
+          echo 'Created only one docker compose to default for docker environment'
           sh '''
 rm -Rf .kube
 mkdir .kube
