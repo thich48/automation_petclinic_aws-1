@@ -19,7 +19,7 @@ pipeline {
 
     stage('Build docker') {
       steps {
-        sh 'docker compose up -d --no-color '
+        sh 'docker compose up'
         sh 'docker compose ps'
       }
     }
