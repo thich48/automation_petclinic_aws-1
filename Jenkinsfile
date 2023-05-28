@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh '''
          java -version
-         docker compose version
+         docker version
         '''
       }
     }
@@ -20,6 +20,7 @@ pipeline {
     stage('Build docker') {
       steps {
        echo 'Build docker : using docker compose multiple microservices'
+        sh 'docker compose up'
       }
     }
 
