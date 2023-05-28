@@ -14,7 +14,6 @@ pipeline {
       steps {
         echo 'Build docker : using docker compose multiple microservices'
         sh 'docker system prune -a --volumes -f'
-        sh './scripts/run_all.sh'
         sh 'docker-compose up'
         
       }
