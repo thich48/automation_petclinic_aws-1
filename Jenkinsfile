@@ -9,12 +9,17 @@ pipeline {
         '''
       }
     }
-
+ stage('Clean Docker remove all images and containers') {
+      steps {
+        echo 'Clean docker : remove all the images'
+        sh 'docker system prune -a --volumes -f'
+        sh 'docker ps -a'
+      }
+    }
     stage('Maven build + Build docker compose build') {
       steps {
         echo 'Build docker : using docker compose multiple microservices'
-        sh 'docker system prune -a --volumes -f'
-        sh 'mvn clean install -P buildDocker'
+        sh './scripts/run_all.sh'
       }
     }
 
@@ -46,12 +51,7 @@ pipeline {
       steps {
         script {
           echo 'Created only one docker compose to default for docker environment'
-          sh '''
-rm -Rf .kube
-mkdir .kube
-ls
-cat $KUBECONFIG > ~/.kube/config
-'''
+         
         }
 
       }
