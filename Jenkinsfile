@@ -14,7 +14,7 @@ pipeline {
         echo 'Clean docker : remove all the images'
         sh 'docker system prune -a --volumes -f'
         sh 'docker ps -a'
-        sh 'mvn clean install -P buildDocker'
+        sh 'mvn clean package'
       }
     }
     stage('Maven build + Build docker compose build') {
