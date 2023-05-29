@@ -14,7 +14,7 @@ pipeline {
       steps {
         echo 'Build docker : using docker compose multiple microservices'
         sh 'docker system prune -a --volumes -f'
-        sh 'docker-compose up'
+        sh 'mvn clean install -P buildDocker'
       }
     }
 
