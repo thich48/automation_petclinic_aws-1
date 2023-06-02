@@ -19,7 +19,7 @@ pipeline {
     stage('Maven build + Build docker compose build') {
       steps {
         echo 'Build docker : using docker compose multiple microservices'
-        sh './scripts/run_all.sh'
+        sh 'docker-compose up'
       }
     }
 
